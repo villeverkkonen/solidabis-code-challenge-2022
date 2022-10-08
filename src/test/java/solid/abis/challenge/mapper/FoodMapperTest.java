@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import solid.abis.challenge.dto.FoodDTO;
+import solid.abis.challenge.util.TestMaterial;
 
 import java.io.File;
 import java.io.FileReader;
@@ -23,6 +24,8 @@ public class FoodMapperTest {
 
     @Autowired
     FoodMapper foodMapper;
+    @Autowired
+    TestMaterial testMaterial;
 
     @Test
     public void shouldReturnListOfDTOs() throws URISyntaxException, IOException, ParseException {
@@ -32,43 +35,11 @@ public class FoodMapperTest {
         Object obj = new JSONParser().parse(reader);
         JSONArray foods = (JSONArray) obj;
 
-        List<FoodDTO> foodDTOList = foodMapper.jsonArrayToDtoList(foods);
-        foodDTOList.sort(Comparator.comparing(FoodDTO::getName));
+        List<FoodDTO> result = foodMapper.jsonArrayToDtoList(foods);
+        result.sort(Comparator.comparing(FoodDTO::getName));
 
-        FoodDTO expectedOne = FoodDTO.builder()
-                .name("Ananas")
-                .carbohydrate(11.2)
-                .protein(0.5)
-                .energy(232.7)
-                .fat(0.4)
-                .build();
-
-        FoodDTO expectedTwo = FoodDTO.builder()
-                .name("Banaani")
-                .carbohydrate(18.3)
-                .protein(1.2)
-                .energy(366.4)
-                .fat(0.4)
-                .build();
-
-        FoodDTO expectedThree = FoodDTO.builder()
-                .name("Omena")
-                .carbohydrate(8.3)
-                .protein(0.2)
-                .energy(169.6)
-                .fat(0.1)
-                .build();
-
-        assertTrue(twoFoodDTOsEquals(expectedOne, foodDTOList.get(0)));
-        assertTrue(twoFoodDTOsEquals(expectedTwo, foodDTOList.get(1)));
-        assertTrue(twoFoodDTOsEquals(expectedThree, foodDTOList.get(2)));
-    }
-    
-    private boolean twoFoodDTOsEquals(FoodDTO a, FoodDTO b) {
-        return a.getName().equals(b.getName()) &&
-                a.getCarbohydrate() == b.getCarbohydrate() &&
-                a.getProtein() == b.getProtein() &&
-                a.getEnergy() == b.getEnergy() &&
-                a.getFat() == b.getFat();
+        assertTrue(testMaterial.twoFoodDTOsEquals(testMaterial.buildPineapple(), result.get(0)));
+        assertTrue(testMaterial.twoFoodDTOsEquals(testMaterial.buildBanana(), result.get(1)));
+        assertTrue(testMaterial.twoFoodDTOsEquals(testMaterial.buildApple(), result.get(2)));
     }
 }
