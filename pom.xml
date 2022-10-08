@@ -15,6 +15,8 @@
 	<description>Solidabis koodihaaste 2022</description>
 	<properties>
 		<java.version>17</java.version>
+		<node.version>v16.13.2</node.version>
+		<npm.version>8.1.2</npm.version>
 	</properties>
 	<dependencies>
 		<dependency>
