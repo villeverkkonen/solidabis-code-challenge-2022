@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Banaani",
+    "carbohydrate": 18.3,
+    "protein": 1.2,
+    "energy": 366.4,
+    "fat": 0.4
+  },
+  {
+    "name": "Omena",
+    "carbohydrate": 8.3,
+    "protein": 0.2,
+    "energy": 169.6,
+    "fat": 0.1
+  },
+  {
+    "name": "Ananas",
+    "carbohydrate": 11.2,
+    "protein": 0.5,
+    "energy": 232.7,
+    "fat": 0.4
+  }
+]
