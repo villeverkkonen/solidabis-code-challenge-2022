@@ -1,6 +1,6 @@
 <template>
   <div class="code-challenge">
-    <h1>Food Fight</h1>
+    <h1>The Masters of the Foodverse</h1>
     <p>{{ msg }}</p>
   </div>
 </template>
@@ -14,7 +14,7 @@ export default {
     }
   },
   mounted() {
-    fetch("/api/challenge/hello")
+    fetch("/api/foods")
     .then((response) => response.text())
     .then((data) => {
       this.msg = data;
