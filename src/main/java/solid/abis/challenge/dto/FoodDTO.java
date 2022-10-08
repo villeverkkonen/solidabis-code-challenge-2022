@@ -1,5 +1,12 @@
 package solid.abis.challenge.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.RequiredArgsConstructor;
+
+@Builder
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class FoodDTO {
     private String name;
     private double carbohydrate;

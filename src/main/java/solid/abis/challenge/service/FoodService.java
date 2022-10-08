@@ -24,7 +24,7 @@ public class FoodService {
     private static final String FOOD_JSON = "json/foods.json";
 
     public List<FoodDTO> getFoodsFromJson() {
-        try (FileReader reader = new FileReader(this.getFileFromResource(FOOD_JSON))) {
+        try (FileReader reader = new FileReader(this.getFileFromResource())) {
             Object obj = new JSONParser().parse(reader);
             JSONArray foods = (JSONArray) obj;
             return foodMapper.jsonArrayToDtoList(foods);
@@ -33,11 +33,11 @@ public class FoodService {
         }
     }
 
-    private File getFileFromResource(final String fileName) throws URISyntaxException {
+    private File getFileFromResource() throws URISyntaxException {
         ClassLoader classLoader = getClass().getClassLoader();
-        URL resource = classLoader.getResource(fileName);
+        URL resource = classLoader.getResource(FoodService.FOOD_JSON);
         if (resource == null) {
-            throw new IllegalArgumentException("File not found! " + fileName);
+            throw new IllegalArgumentException("File not found! " + FoodService.FOOD_JSON);
         } else {
             return new File(resource.toURI());
         }
