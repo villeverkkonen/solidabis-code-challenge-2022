@@ -1,25 +1,25 @@
 <template>
   <div class="code-challenge">
     <h1>The Masters of the Foodverse</h1>
-    <p>{{ msg }}</p>
+    <p v-for="food in foods" v-bind:key="food.name">{{ food }}</p>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'CodeChallenge',
+  name: "CodeChallenge",
   data() {
     return {
-      msg: ''
-    }
+      foods: [],
+    };
   },
   mounted() {
     fetch("/api/foods")
-    .then((response) => response.text())
-    .then((data) => {
-      this.msg = data;
-    });
-  }
-}
+      .then((resp) => resp.json())
+      .then((data) => {
+        this.foods = data;
+      })
+      .catch((err) => console.log("Request Failed", err));
+  },
+};
 </script>
-
