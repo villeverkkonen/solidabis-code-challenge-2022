@@ -4,6 +4,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
+import solid.abis.challenge.dto.FighterFoodDTO;
 import solid.abis.challenge.dto.FoodDTO;
 import solid.abis.challenge.mapper.FoodMapper;
 
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FoodService {
@@ -23,11 +25,12 @@ public class FoodService {
 
     private static final String FOOD_JSON = "json/foods.json";
 
-    public List<FoodDTO> getFoodsFromJson() {
+    public List<FighterFoodDTO> getFoodsFromJson() {
         try (FileReader reader = new FileReader(this.getFileFromResource())) {
             Object obj = new JSONParser().parse(reader);
             JSONArray foods = (JSONArray) obj;
-            return foodMapper.jsonArrayToDtoList(foods);
+            List<FoodDTO> foodDTOList = foodMapper.jsonArrayToFoodDTOList(foods);
+            return foodDTOList.stream().map(foodMapper::foodToFighterFood).collect(Collectors.toList());
         } catch (IOException | ParseException | URISyntaxException e) {
             throw new RuntimeException(e);
         }

@@ -1,7 +1,13 @@
 <template>
   <div class="code-challenge">
     <h1>The Masters of the Foodverse</h1>
-    <p v-for="food in foods" v-bind:key="food.name">{{ food }}</p>
+    <div v-for="food in foods" v-bind:key="food.name">
+      <p>Name: {{ food.name }}</p>
+      <p>Health: {{ food.health }}</p>
+      <p>Attack: {{ food.attack }}</p>
+      <p>Defence: {{ food.defence }}</p>
+      <p>Delay: {{ food.delay }}</p>
+    </div>
   </div>
 </template>
 

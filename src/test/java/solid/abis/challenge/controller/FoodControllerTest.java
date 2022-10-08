@@ -3,8 +3,8 @@ package solid.abis.challenge.controller;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import solid.abis.challenge.dto.FoodDTO;
-import solid.abis.challenge.util.TestMaterial;
+import solid.abis.challenge.dto.FighterFoodDTO;
+import solid.abis.challenge.util.TestUtil;
 
 import java.util.Comparator;
 import java.util.List;
@@ -17,15 +17,15 @@ public class FoodControllerTest {
     @Autowired
     private FoodController foodController;
     @Autowired
-    TestMaterial testMaterial;
+    TestUtil testUtil;
 
     @Test
     void shouldGetFoodsFromJson() {
-        List<FoodDTO> result = foodController.getFoods();
-        result.sort(Comparator.comparing(FoodDTO::getName));
+        List<FighterFoodDTO> result = foodController.getFoods();
+        result.sort(Comparator.comparing(FighterFoodDTO::getName));
 
-        assertTrue(testMaterial.twoFoodDTOsEquals(testMaterial.buildPineapple(), result.get(0)));
-        assertTrue(testMaterial.twoFoodDTOsEquals(testMaterial.buildBanana(), result.get(1)));
-        assertTrue(testMaterial.twoFoodDTOsEquals(testMaterial.buildApple(), result.get(2)));
+        assertTrue(testUtil.twoFighterFoodDTOsEquals(testUtil.buildFighterApple(), result.get(0)));
+        assertTrue(testUtil.twoFighterFoodDTOsEquals(testUtil.buildFighterBanana(), result.get(1)));
+        assertTrue(testUtil.twoFighterFoodDTOsEquals(testUtil.buildFighterPineapple(), result.get(2)));
     }
 }

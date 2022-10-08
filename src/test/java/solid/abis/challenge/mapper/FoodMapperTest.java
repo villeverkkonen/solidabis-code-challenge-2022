@@ -6,8 +6,9 @@ import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import solid.abis.challenge.dto.FighterFoodDTO;
 import solid.abis.challenge.dto.FoodDTO;
-import solid.abis.challenge.util.TestMaterial;
+import solid.abis.challenge.util.TestUtil;
 
 import java.io.File;
 import java.io.FileReader;
@@ -25,7 +26,7 @@ public class FoodMapperTest {
     @Autowired
     FoodMapper foodMapper;
     @Autowired
-    TestMaterial testMaterial;
+    TestUtil testUtil;
 
     @Test
     public void shouldReturnListOfDTOs() throws URISyntaxException, IOException, ParseException {
@@ -35,11 +36,19 @@ public class FoodMapperTest {
         Object obj = new JSONParser().parse(reader);
         JSONArray foods = (JSONArray) obj;
 
-        List<FoodDTO> result = foodMapper.jsonArrayToDtoList(foods);
-        result.sort(Comparator.comparing(FoodDTO::getName));
+        List<FoodDTO> foodDTOList = foodMapper.jsonArrayToFoodDTOList(foods);
+        List<FighterFoodDTO> fighterFoodDTOList = foodDTOList.stream().map(foodMapper::foodToFighterFood).sorted(Comparator.comparing(FighterFoodDTO::getName)).toList();
 
-        assertTrue(testMaterial.twoFoodDTOsEquals(testMaterial.buildPineapple(), result.get(0)));
-        assertTrue(testMaterial.twoFoodDTOsEquals(testMaterial.buildBanana(), result.get(1)));
-        assertTrue(testMaterial.twoFoodDTOsEquals(testMaterial.buildApple(), result.get(2)));
+        assertTrue(testUtil.twoFighterFoodDTOsEquals(testUtil.buildFighterApple(), fighterFoodDTOList.get(0)));
+        assertTrue(testUtil.twoFighterFoodDTOsEquals(testUtil.buildFighterBanana(), fighterFoodDTOList.get(1)));
+        assertTrue(testUtil.twoFighterFoodDTOsEquals(testUtil.buildFighterPineapple(), fighterFoodDTOList.get(2)));
+    }
+
+    @Test
+    public void shouldMapFoodToFighterFood() {
+        FoodDTO apple = testUtil.buildApple();
+        FighterFoodDTO expected = testUtil.buildFighterApple();
+        FighterFoodDTO result = foodMapper.foodToFighterFood(apple);
+        assertTrue(testUtil.twoFighterFoodDTOsEquals(expected, result));
     }
 }
