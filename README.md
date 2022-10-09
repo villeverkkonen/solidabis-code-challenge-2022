@@ -3,7 +3,11 @@
 ## Solidabis autumn 2022 code challenge
 
 ### Backend
-- Java Spring Boot
+- Java
+- Spring Boot
+- Maven
+- JUnit unit tests
 
 ### Frontend
-- Vue.js
+- Vue
+- Vue Unit Test / Vitest unit tests
