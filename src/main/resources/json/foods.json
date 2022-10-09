@@ -3,21 +3,21 @@
     "name": "Apple",
     "carbohydrate": 8.3,
     "protein": 0.2,
-    "energy": 169.6,
+    "energy": 27,
     "fat": 0.1
   },
   {
     "name": "Banana",
     "carbohydrate": 18.3,
     "protein": 1.2,
-    "energy": 366.4,
+    "energy": 46.6,
     "fat": 0.4
   },
   {
     "name": "Pineapple",
     "carbohydrate": 11.2,
     "protein": 0.5,
-    "energy": 232.7,
+    "energy": 33.3,
     "fat": 0.4
   }
 ]

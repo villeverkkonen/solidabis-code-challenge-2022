@@ -13,6 +13,7 @@ public class FighterFoodDTO {
     private String name;
     private double health;
     private double attack;
+
     private double defence;
     private double delay;
 
@@ -22,6 +23,10 @@ public class FighterFoodDTO {
 
     public double getHealth() {
         return health;
+    }
+
+    public void setHealth(double health) {
+        this.health = health;
     }
 
     public double getAttack() {

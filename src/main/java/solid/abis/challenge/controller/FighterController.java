@@ -1,8 +1,6 @@
 package solid.abis.challenge.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import solid.abis.challenge.dto.FighterFoodDTO;
 import solid.abis.challenge.service.FighterService;
 
@@ -19,5 +17,10 @@ public class FighterController {
     @GetMapping("")
     public List<FighterFoodDTO> getFighters() {
         return fighterService.getFoodsFromJson();
+    }
+
+    @PostMapping("/fight")
+    public List<String> fight(@RequestBody List<FighterFoodDTO> fighters) {
+        return fighterService.fight(fighters);
     }
 }

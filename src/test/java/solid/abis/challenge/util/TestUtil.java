@@ -12,7 +12,7 @@ public class TestUtil {
                 .name("Apple")
                 .attack(8.3)
                 .defence(0.2)
-                .health(169.6)
+                .health(27)
                 .delay(0.9)
                 .build();
     }
@@ -22,7 +22,7 @@ public class TestUtil {
                 .name("Banana")
                 .attack(18.3)
                 .defence(1.2)
-                .health(366.4)
+                .health(46.6)
                 .delay(2)
                 .build();
     }
@@ -32,7 +32,7 @@ public class TestUtil {
                 .name("Pineapple")
                 .attack(11.2)
                 .defence(0.5)
-                .health(232.7)
+                .health(33.3)
                 .delay(1.2)
                 .build();
     }
@@ -42,7 +42,7 @@ public class TestUtil {
                 .name("Apple")
                 .carbohydrate(8.3)
                 .protein(0.2)
-                .energy(169.6)
+                .energy(27)
                 .fat(0.1)
                 .build();
     }

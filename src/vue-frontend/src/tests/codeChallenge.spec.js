@@ -22,21 +22,21 @@ describe("CodeChallenge.vue", () => {
           name: "Apple",
           attack: 8.3,
           defence: 0.2,
-          health: 169.6,
+          health: 27,
           delay: 0.9,
         },
         {
           name: "Banana",
           attack: 18.3,
           defence: 1.2,
-          health: 366.4,
+          health: 46.6,
           delay: 2,
         },
         {
           name: "Pineapple",
           attack: 11.2,
           defence: 0.5,
-          health: 232.7,
+          health: 33.3,
           delay: 1.2,
         },
       ],
@@ -68,7 +68,7 @@ describe("CodeChallenge.vue", () => {
       .findAll("p");
     expect(fighterSelectOne.find("h3").text()).toMatch("Fighter 1");
     expect(fighterSelectOneStats.at(0).text()).toMatch("Name: Apple");
-    expect(fighterSelectOneStats.at(1).text()).toMatch("Health: 169.6");
+    expect(fighterSelectOneStats.at(1).text()).toMatch("Health: 27");
     expect(fighterSelectOneStats.at(2).text()).toMatch("Attack: 8.3");
     expect(fighterSelectOneStats.at(3).text()).toMatch("Defence: 0.2");
     expect(fighterSelectOneStats.at(4).text()).toMatch("Delay: 0.9");
@@ -79,7 +79,7 @@ describe("CodeChallenge.vue", () => {
       .findAll("p");
     expect(fighterSelectTwo.find("h3").text()).toMatch("Fighter 2");
     expect(fighterSelectTwoStats.at(0).text()).toMatch("Name: Pineapple");
-    expect(fighterSelectTwoStats.at(1).text()).toMatch("Health: 232.7");
+    expect(fighterSelectTwoStats.at(1).text()).toMatch("Health: 33.3");
     expect(fighterSelectTwoStats.at(2).text()).toMatch("Attack: 11.2");
     expect(fighterSelectTwoStats.at(3).text()).toMatch("Defence: 0.5");
     expect(fighterSelectTwoStats.at(4).text()).toMatch("Delay: 1.2");
