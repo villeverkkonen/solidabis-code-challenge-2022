@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class FoodService {
+public class FighterService {
 
     @Resource
     private FoodMapper foodMapper;
@@ -38,9 +38,9 @@ public class FoodService {
 
     private File getFileFromResource() throws URISyntaxException {
         ClassLoader classLoader = getClass().getClassLoader();
-        URL resource = classLoader.getResource(FoodService.FOOD_JSON);
+        URL resource = classLoader.getResource(FighterService.FOOD_JSON);
         if (resource == null) {
-            throw new IllegalArgumentException("File not found! " + FoodService.FOOD_JSON);
+            throw new IllegalArgumentException("File not found! " + FighterService.FOOD_JSON);
         } else {
             return new File(resource.toURI());
         }

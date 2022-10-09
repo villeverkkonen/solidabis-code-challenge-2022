@@ -12,16 +12,16 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
-public class FoodServiceTest {
+public class FighterServiceTest {
 
     @Autowired
-    private FoodService foodService;
+    private FighterService fighterService;
     @Autowired
     TestUtil testUtil;
 
     @Test
     void shouldGetFoodsFromJson() {
-        List<FighterFoodDTO> result = foodService.getFoodsFromJson();
+        List<FighterFoodDTO> result = fighterService.getFoodsFromJson();
         result.sort(Comparator.comparing(FighterFoodDTO::getName));
 
         assertTrue(testUtil.twoFighterFoodDTOsEquals(testUtil.buildFighterApple(), result.get(0)));

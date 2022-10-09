@@ -54,9 +54,9 @@ describe("CodeChallenge.vue", () => {
     wrapper.unmount();
   });
 
-  it("should get foods", () => {
+  it("should get fighters", () => {
     expect(axios.get).toHaveBeenCalledTimes(1);
-    expect(wrapper.vm.foods.length === 3);
+    expect(wrapper.vm.fighters.length === 3);
   });
 
   it("should render two fighter divs", () => {

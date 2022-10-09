@@ -4,20 +4,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import solid.abis.challenge.dto.FighterFoodDTO;
-import solid.abis.challenge.service.FoodService;
+import solid.abis.challenge.service.FighterService;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/foods")
-public class FoodController {
+@RequestMapping("/api/fighters")
+public class FighterController {
 
     @Resource
-    FoodService foodService;
+    FighterService fighterService;
 
     @GetMapping("")
-    public List<FighterFoodDTO> getFoods() {
-        return foodService.getFoodsFromJson();
+    public List<FighterFoodDTO> getFighters() {
+        return fighterService.getFoodsFromJson();
     }
 }

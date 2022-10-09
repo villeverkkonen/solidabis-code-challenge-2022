@@ -35,7 +35,7 @@ export default {
   name: "CodeChallenge",
   data() {
     return {
-      foods: [],
+      fighters: [],
       loadingFighters: true,
       fighterSelectOne: null,
       fighterSelectTwo: null
@@ -43,9 +43,9 @@ export default {
   },
   mounted() {
     axios
-      .get("/api/foods")
+      .get("/api/fighters")
       .then((resp) => {
-        this.foods = resp.data;
+        this.fighters = resp.data;
         this.fighterSelectOne = resp.data[0];
         this.fighterSelectTwo = resp.data[2];
         this.loadingFighters = false;
