@@ -40,12 +40,14 @@ public class FighterService {
 
     public List<String> fight(final List<FighterFoodDTO> fighters) {
         List<String> fightLog = new ArrayList<>();
-        FighterFoodDTO fighter1 = fighters.get(0);
-        FighterFoodDTO fighter2 = fighters.get(1);
-        if (fighter1 == null || fighter2 == null) {
+
+        if (fighters.get(0) == null || fighters.get(1) == null) {
             fightLog.add("Two fighters are required for a fair brawl.");
             return fightLog;
         }
+
+        FighterFoodDTO fighter1 = fighters.get(0);
+        FighterFoodDTO fighter2 = fighters.get(1);
 
         fightLog.add(fighter1.getName() + " VS " + fighter2.getName());
 
