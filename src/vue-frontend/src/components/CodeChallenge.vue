@@ -12,7 +12,10 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from 'vue';
+import axios from 'axios';
+
+export default defineComponent({
   name: "CodeChallenge",
   data() {
     return {
@@ -20,12 +23,12 @@ export default {
     };
   },
   mounted() {
-    fetch("/api/foods")
-      .then((resp) => resp.json())
-      .then((data) => {
-        this.foods = data;
+    axios
+      .get("/api/foods")
+      .then((resp) => {
+        this.foods = resp.data;
       })
       .catch((err) => console.log("Request Failed", err));
   },
-};
+});
 </script>
