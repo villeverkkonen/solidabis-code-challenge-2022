@@ -2,6 +2,7 @@ import { shallowMount } from "@vue/test-utils";
 import CodeChallenge from "../components/CodeChallenge.vue";
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import axios from "axios";
+import flushPromises from "flush-promises";
 
 describe("CodeChallenge.vue", () => {
   let wrapper = null;
@@ -14,35 +15,38 @@ describe("CodeChallenge.vue", () => {
     };
   });
 
-  beforeEach(() => {
+  beforeEach(async () => {
     const responseGet = {
       data: [
         {
           name: "Apple",
-          carbohydrate: 8.3,
-          protein: 0.2,
-          energy: 169.6,
-          fat: 0.1,
+          attack: 8.3,
+          defence: 0.2,
+          health: 169.6,
+          delay: 0.9,
         },
         {
           name: "Banana",
-          carbohydrate: 18.3,
-          protein: 1.2,
-          energy: 366.4,
-          fat: 0.4,
+          attack: 18.3,
+          defence: 1.2,
+          health: 366.4,
+          delay: 2,
         },
         {
           name: "Pineapple",
-          carbohydrate: 11.2,
-          protein: 0.5,
-          enegy: 232.7,
-          fat: 0.4,
+          attack: 11.2,
+          defence: 0.5,
+          health: 232.7,
+          delay: 1.2,
         },
       ],
     };
 
     axios.get.mockResolvedValue(responseGet);
     wrapper = shallowMount(CodeChallenge);
+
+    // Wait until component has mounted
+    await flushPromises();
   });
 
   afterEach(() => {
@@ -57,5 +61,31 @@ describe("CodeChallenge.vue", () => {
 
   it("should render page header", () => {
     expect(wrapper.text()).toMatch("The Masters of the Foodverse");
+  });
+
+  it("should render two fighter divs", () => {
+    const fighterSelectDivs = wrapper.findAll(".fighterSelect");
+
+    const fighterSelectOne = fighterSelectDivs.at(0);
+    const fighterSelectOneStats = wrapper
+      .find(".fighterSelectOneStats")
+      .findAll("p");
+    expect(fighterSelectOne.find("h3").text()).toMatch("Fighter 1");
+    expect(fighterSelectOneStats.at(0).text()).toMatch("Name: Apple");
+    expect(fighterSelectOneStats.at(1).text()).toMatch("Health: 169.6");
+    expect(fighterSelectOneStats.at(2).text()).toMatch("Attack: 8.3");
+    expect(fighterSelectOneStats.at(3).text()).toMatch("Defence: 0.2");
+    expect(fighterSelectOneStats.at(4).text()).toMatch("Delay: 0.9");
+
+    const fighterSelectTwo = fighterSelectDivs.at(1);
+    const fighterSelectTwoStats = wrapper
+      .find(".fighterSelectTwoStats")
+      .findAll("p");
+    expect(fighterSelectTwo.find("h3").text()).toMatch("Fighter 2");
+    expect(fighterSelectTwoStats.at(0).text()).toMatch("Name: Pineapple");
+    expect(fighterSelectTwoStats.at(1).text()).toMatch("Health: 232.7");
+    expect(fighterSelectTwoStats.at(2).text()).toMatch("Attack: 11.2");
+    expect(fighterSelectTwoStats.at(3).text()).toMatch("Defence: 0.5");
+    expect(fighterSelectTwoStats.at(4).text()).toMatch("Delay: 1.2");
   });
 });
