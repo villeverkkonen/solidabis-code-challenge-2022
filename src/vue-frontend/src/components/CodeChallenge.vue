@@ -32,7 +32,7 @@
       </div>
 
       <div class="fight">
-        <button @click="handleFight">Fight!</button>
+        <button id="fightButton" @click="handleFight">Fight!</button>
       </div>
 
       <div class="fightLog" v-if="fightLog.length > 0">

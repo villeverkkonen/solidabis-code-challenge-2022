@@ -5,12 +5,23 @@ import axios from "axios";
 import flushPromises from "flush-promises";
 
 describe("CodeChallenge.vue", () => {
+  const responsePost = {
+    data: [
+      "Apple VS Pineapple",
+      "0.9s Apple hits 1.3 damage. Pineapple has 32.0 Health.",
+      "1.2s Pineapple hits 7.5 damage. Apple has 19.5 Health.",
+      "1.8s Apple hits 1.3 damage. Pineapple has 30.5 Health.",
+      "Apple wins the battle!",
+    ],
+  };
+
   let wrapper = null;
 
   vi.mock("axios", () => {
     return {
       default: {
         get: vi.fn(),
+        post: vi.fn(),
       },
     };
   });
@@ -83,5 +94,14 @@ describe("CodeChallenge.vue", () => {
     expect(fighterSelectTwoStats.at(2).text()).toMatch("Attack: 11.2");
     expect(fighterSelectTwoStats.at(3).text()).toMatch("Defence: 0.5");
     expect(fighterSelectTwoStats.at(4).text()).toMatch("Delay: 1.2");
+  });
+
+  it("should fight and show fight logs", async () => {
+    axios.post.mockResolvedValue(responsePost);
+    wrapper.find("#fightButton").trigger("click");
+    // Wait until post completed
+    await flushPromises();
+    const fightLogText = wrapper.findAll(".fightLog").at(0).text();
+    expect(fightLogText).toContain("Apple VS Pineapple");
   });
 });
