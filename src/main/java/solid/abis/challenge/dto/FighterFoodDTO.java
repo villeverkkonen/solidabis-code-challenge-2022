@@ -10,12 +10,17 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class FighterFoodDTO {
+    private Long id;
     private String name;
     private double health;
     private double attack;
 
     private double defence;
     private double delay;
+
+    public Long getId() {
+        return id;
+    }
 
     public String getName() {
         return name;

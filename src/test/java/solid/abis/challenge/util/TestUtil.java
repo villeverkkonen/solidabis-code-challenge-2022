@@ -9,6 +9,7 @@ public class TestUtil {
 
     public FighterFoodDTO buildFighterApple() {
         return FighterFoodDTO.builder()
+                .id(1L)
                 .name("Apple")
                 .attack(8.3)
                 .defence(0.2)
@@ -19,6 +20,7 @@ public class TestUtil {
 
     public FighterFoodDTO buildFighterBanana() {
         return FighterFoodDTO.builder()
+                .id(2L)
                 .name("Banana")
                 .attack(18.3)
                 .defence(1.2)
@@ -29,6 +31,7 @@ public class TestUtil {
 
     public FighterFoodDTO buildFighterPineapple() {
         return FighterFoodDTO.builder()
+                .id(3L)
                 .name("Pineapple")
                 .attack(11.2)
                 .defence(0.5)
@@ -39,6 +42,7 @@ public class TestUtil {
 
     public FoodDTO buildApple() {
         return FoodDTO.builder()
+                .id(1L)
                 .name("Apple")
                 .carbohydrate(8.3)
                 .protein(0.2)

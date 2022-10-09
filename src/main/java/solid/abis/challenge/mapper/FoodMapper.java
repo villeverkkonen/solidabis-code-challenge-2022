@@ -20,6 +20,7 @@ public class FoodMapper {
 
     public FighterFoodDTO foodToFighterFood(final FoodDTO foodDTO) {
         return FighterFoodDTO.builder()
+                .id(foodDTO.getId())
                 .name(foodDTO.getName())
                 .health(foodDTO.getEnergy())
                 .attack(foodDTO.getCarbohydrate())

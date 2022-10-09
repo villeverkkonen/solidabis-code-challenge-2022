@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
@@ -32,7 +33,9 @@ public class FighterService {
             Object obj = new JSONParser().parse(reader);
             JSONArray foods = (JSONArray) obj;
             List<FoodDTO> foodDTOList = foodMapper.jsonArrayToFoodDTOList(foods);
-            return foodDTOList.stream().map(foodMapper::foodToFighterFood).collect(Collectors.toList());
+            List<FighterFoodDTO> fighterFoodDTOList = foodDTOList.stream().map(foodMapper::foodToFighterFood).collect(Collectors.toList());
+            fighterFoodDTOList.sort(Comparator.comparing(FighterFoodDTO::getId));
+            return fighterFoodDTOList;
         } catch (IOException | ParseException | URISyntaxException e) {
             throw new RuntimeException(e);
         }

@@ -10,11 +10,16 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class FoodDTO {
+    private Long id;
     private String name;
     private double energy;
     private double carbohydrate;
     private double protein;
     private double fat;
+
+    public Long getId() {
+        return id;
+    }
 
     public String getName() {
         return name;

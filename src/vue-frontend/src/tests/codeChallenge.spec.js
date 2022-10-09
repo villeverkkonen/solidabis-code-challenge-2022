@@ -30,6 +30,7 @@ describe("CodeChallenge.vue", () => {
     const responseGet = {
       data: [
         {
+          id: 1,
           name: "Apple",
           attack: 8.3,
           defence: 0.2,
@@ -37,6 +38,7 @@ describe("CodeChallenge.vue", () => {
           delay: 0.9,
         },
         {
+          id: 2,
           name: "Banana",
           attack: 18.3,
           defence: 1.2,
@@ -44,6 +46,7 @@ describe("CodeChallenge.vue", () => {
           delay: 2,
         },
         {
+          id: 3,
           name: "Pineapple",
           attack: 11.2,
           defence: 0.5,
@@ -78,22 +81,24 @@ describe("CodeChallenge.vue", () => {
       .find(".fighterSelectOneStats")
       .findAll("p");
     expect(fighterSelectOne.find("h3").text()).toMatch("Fighter 1");
-    expect(fighterSelectOneStats.at(0).text()).toMatch("Name: Apple");
-    expect(fighterSelectOneStats.at(1).text()).toMatch("Health: 27");
-    expect(fighterSelectOneStats.at(2).text()).toMatch("Attack: 8.3");
-    expect(fighterSelectOneStats.at(3).text()).toMatch("Defence: 0.2");
-    expect(fighterSelectOneStats.at(4).text()).toMatch("Delay: 0.9");
+    expect(fighterSelectOneStats.at(0).text()).toMatch("Id: 1");
+    expect(fighterSelectOneStats.at(1).text()).toMatch("Name: Apple");
+    expect(fighterSelectOneStats.at(2).text()).toMatch("Health: 27");
+    expect(fighterSelectOneStats.at(3).text()).toMatch("Attack: 8.3");
+    expect(fighterSelectOneStats.at(4).text()).toMatch("Defence: 0.2");
+    expect(fighterSelectOneStats.at(5).text()).toMatch("Delay: 0.9");
 
     const fighterSelectTwo = fighterSelectDivs.at(1);
     const fighterSelectTwoStats = wrapper
       .find(".fighterSelectTwoStats")
       .findAll("p");
     expect(fighterSelectTwo.find("h3").text()).toMatch("Fighter 2");
-    expect(fighterSelectTwoStats.at(0).text()).toMatch("Name: Pineapple");
-    expect(fighterSelectTwoStats.at(1).text()).toMatch("Health: 33.3");
-    expect(fighterSelectTwoStats.at(2).text()).toMatch("Attack: 11.2");
-    expect(fighterSelectTwoStats.at(3).text()).toMatch("Defence: 0.5");
-    expect(fighterSelectTwoStats.at(4).text()).toMatch("Delay: 1.2");
+    expect(fighterSelectTwoStats.at(0).text()).toMatch("Id: 3");
+    expect(fighterSelectTwoStats.at(1).text()).toMatch("Name: Pineapple");
+    expect(fighterSelectTwoStats.at(2).text()).toMatch("Health: 33.3");
+    expect(fighterSelectTwoStats.at(3).text()).toMatch("Attack: 11.2");
+    expect(fighterSelectTwoStats.at(4).text()).toMatch("Defence: 0.5");
+    expect(fighterSelectTwoStats.at(5).text()).toMatch("Delay: 1.2");
   });
 
   it("should fight and show fight logs", async () => {
