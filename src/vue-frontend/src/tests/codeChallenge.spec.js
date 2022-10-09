@@ -59,10 +59,6 @@ describe("CodeChallenge.vue", () => {
     expect(wrapper.vm.foods.length === 3);
   });
 
-  it("should render page header", () => {
-    expect(wrapper.text()).toMatch("The Masters of the Foodverse");
-  });
-
   it("should render two fighter divs", () => {
     const fighterSelectDivs = wrapper.findAll(".fighterSelect");
 
