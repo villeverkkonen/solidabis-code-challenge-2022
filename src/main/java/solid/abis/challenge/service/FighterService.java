@@ -14,9 +14,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
@@ -41,18 +39,18 @@ public class FighterService {
         }
     }
 
-    public List<String> fight(final List<FighterFoodDTO> fighters) {
-        List<String> fightLog = new ArrayList<>();
+    public List<Map<String, List<String>>> fight(final List<FighterFoodDTO> fighters) {
+        List<Map<String, List<String>>> fightLog = new ArrayList<>();
 
         if (fighters.get(0) == null || fighters.get(1) == null) {
-            fightLog.add("Two fighters are required for a fair brawl.");
+            fightLog.add(Collections.singletonMap("invalidFighters", List.of("Two fighters are required for a fair brawl.")));
             return fightLog;
         }
 
         FighterFoodDTO fighter1 = fighters.get(0);
         FighterFoodDTO fighter2 = fighters.get(1);
 
-        fightLog.add(fighter1.getName() + " VS " + fighter2.getName());
+        fightLog.add(Collections.singletonMap("startGame", List.of(fighter1.getName(), " VS ", fighter2.getName())));
 
         int fighterOneRound = 1;
         int fighterTwoRound = 1;
@@ -61,35 +59,35 @@ public class FighterService {
             double fighterTwoDelay = fighter2.getDelay() * fighterTwoRound;
             // Decide who hits who
             if (fighterOneDelay < fighterTwoDelay) {
-                hit(fighter1, fighter2, fighterOneRound, fightLog);
+                hit(fighter1, fighter2, fighterOneRound, fightLog, "playerOne");
                 fighterOneRound++;
             } else {
-                hit(fighter2, fighter1, fighterTwoRound, fightLog);
+                hit(fighter2, fighter1, fighterTwoRound, fightLog, "playerTwo");
                 fighterTwoRound++;
             }
 
             // End game
             if (fighter1.getHealth() <= 0) {
-                fightLog.add(fighter2.getName() + " wins the battle!");
+                fightLog.add(Collections.singletonMap("endGame", List.of("playerTwo", fighter2.getName() + " wins the battle!")));
                 break;
             }
             if (fighter2.getHealth() <= 0) {
-                fightLog.add(fighter1.getName() + " wins the battle!");
+                fightLog.add(Collections.singletonMap("endGame", List.of("playerOne", fighter1.getName() + " wins the battle!")));
                 break;
             }
         }
         return fightLog;
     }
 
-    private void hit(FighterFoodDTO hitter, FighterFoodDTO target, int round, List<String> fightLog) {
+    private void hit(final FighterFoodDTO hitter, FighterFoodDTO target, final int round, List<Map<String, List<String>>> fightLog, final String player) {
         double time = roundToOneDecimal(hitter.getDelay() * round);
         // Damage is randomized between 0 and attack
         double damage = roundToOneDecimal(ThreadLocalRandom.current().nextDouble(0, (hitter.getAttack() - target.getDefence())));
         target.setHealth(roundToOneDecimal(target.getHealth() - damage));
-        fightLog.add(time + "s   " + hitter.getName() + " hits " + damage + " damage.   " + target.getName() + " has " + target.getHealth() + " Health.");
+        fightLog.add(Collections.singletonMap("row", List.of(player, time + "s", hitter.getName() + " hits " + damage + " damage.", target.getName() + " has " + target.getHealth() + " Health.")));
     }
 
-    private static double roundToOneDecimal(double value) {
+    private static double roundToOneDecimal(final double value) {
         int scale = (int) Math.pow(10, 1);
         return (double) Math.round(value * scale) / scale;
     }

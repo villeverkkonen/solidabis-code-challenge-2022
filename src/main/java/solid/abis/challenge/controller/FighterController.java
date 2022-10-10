@@ -6,6 +6,7 @@ import solid.abis.challenge.service.FighterService;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/fighters")
@@ -20,7 +21,7 @@ public class FighterController {
     }
 
     @PostMapping("/fight")
-    public List<String> fight(@RequestBody List<FighterFoodDTO> fighters) {
+    public List<Map<String, List<String>>> fight(@RequestBody List<FighterFoodDTO> fighters) {
         return fighterService.fight(fighters);
     }
 }

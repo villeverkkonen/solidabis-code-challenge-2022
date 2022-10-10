@@ -7,11 +7,18 @@ import flushPromises from "flush-promises";
 describe("CodeChallenge.vue", () => {
   const responsePost = {
     data: [
-      "Apple VS Pineapple",
-      "0.9s Apple hits 1.3 damage. Pineapple has 32.0 Health.",
-      "1.2s Pineapple hits 7.5 damage. Apple has 19.5 Health.",
-      "1.8s Apple hits 1.3 damage. Pineapple has 30.5 Health.",
-      "Apple wins the battle!",
+      { startGame: ["Apple", [" VS "], "Pineapple"] },
+      {
+        row: [
+          "playerOne",
+          "0.9s",
+          "Apple hits 1.3 damage.",
+          "Pineapple has 32.0 Health.",
+        ],
+      },
+      { row: ["1.2s", "Pineapple hits 7.5 damage.", "Apple has 19.5 Health."] },
+      { row: ["1.8s", "Apple hits 1.3 damage.", "Pineapple has 30.5 Health."] },
+      { endGame: ["playerOne", "Apple wins the battle!"] },
     ],
   };
 
@@ -70,7 +77,7 @@ describe("CodeChallenge.vue", () => {
 
   function nameShouldMatch(element, name) {
     const fighterSelectOneStats = wrapper.find(element).findAll("p");
-    expect(fighterSelectOneStats.at(1).text()).toMatch(name);
+    expect(fighterSelectOneStats.at(0).text()).toMatch(name);
   }
 
   function clickFighterChangeButton(element, index) {
@@ -90,25 +97,21 @@ describe("CodeChallenge.vue", () => {
     const fighterSelectOneStats = wrapper
       .find(".fighterSelectOneStats")
       .findAll("p");
-    expect(fighterSelectOne.find("h3").text()).toMatch("Fighter 1");
-    expect(fighterSelectOneStats.at(0).text()).toMatch("Id: 1");
-    expect(fighterSelectOneStats.at(1).text()).toMatch("Name: Apple");
-    expect(fighterSelectOneStats.at(2).text()).toMatch("Health: 27");
-    expect(fighterSelectOneStats.at(3).text()).toMatch("Attack: 8.3");
-    expect(fighterSelectOneStats.at(4).text()).toMatch("Defence: 0.2");
-    expect(fighterSelectOneStats.at(5).text()).toMatch("Delay: 0.9");
+    expect(fighterSelectOneStats.at(0).text()).toMatch("Name: Apple");
+    expect(fighterSelectOneStats.at(1).text()).toMatch("Health: 27");
+    expect(fighterSelectOneStats.at(2).text()).toMatch("Attack: 8.3");
+    expect(fighterSelectOneStats.at(3).text()).toMatch("Defence: 0.2");
+    expect(fighterSelectOneStats.at(4).text()).toMatch("Delay: 0.9");
 
     const fighterSelectTwo = fighterSelectDivs.at(1);
     const fighterSelectTwoStats = wrapper
       .find(".fighterSelectTwoStats")
       .findAll("p");
-    expect(fighterSelectTwo.find("h3").text()).toMatch("Fighter 2");
-    expect(fighterSelectTwoStats.at(0).text()).toMatch("Id: 3");
-    expect(fighterSelectTwoStats.at(1).text()).toMatch("Name: Pineapple");
-    expect(fighterSelectTwoStats.at(2).text()).toMatch("Health: 33.3");
-    expect(fighterSelectTwoStats.at(3).text()).toMatch("Attack: 11.2");
-    expect(fighterSelectTwoStats.at(4).text()).toMatch("Defence: 0.5");
-    expect(fighterSelectTwoStats.at(5).text()).toMatch("Delay: 1.2");
+    expect(fighterSelectTwoStats.at(0).text()).toMatch("Name: Pineapple");
+    expect(fighterSelectTwoStats.at(1).text()).toMatch("Health: 33.3");
+    expect(fighterSelectTwoStats.at(2).text()).toMatch("Attack: 11.2");
+    expect(fighterSelectTwoStats.at(3).text()).toMatch("Defence: 0.5");
+    expect(fighterSelectTwoStats.at(4).text()).toMatch("Delay: 1.2");
   });
 
   it("should fight and show fight logs", async () => {
@@ -116,8 +119,10 @@ describe("CodeChallenge.vue", () => {
     wrapper.find("#fightButton").trigger("click");
     // Wait until post completed
     await flushPromises();
-    const fightLogText = wrapper.findAll(".fightLog").at(0).text();
-    expect(fightLogText).toContain("Apple VS Pineapple");
+    const fightLogStartGame = wrapper.findAll(".fightLog");
+    expect(fightLogStartGame.at(0).text()).toContain("Apple");
+    expect(fightLogStartGame.at(0).text()).toContain(" VS ");
+    expect(fightLogStartGame.at(0).text()).toContain("Pineapple");
   });
 
   it("should be able to change fighter for player one", async () => {

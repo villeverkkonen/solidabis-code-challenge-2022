@@ -9,9 +9,7 @@
 
       <div class="fighterSelectParentDiv">
         <div class="fighterSelect">
-          <h3>Fighter 1</h3>
           <div class="fighterSelectOneStats">
-            <p>Id: {{ fighterSelectOne.id }}</p>
             <p>Name: {{ fighterSelectOne.name }}</p>
             <p>Health: {{ fighterSelectOne.health }}</p>
             <p>Attack: {{ fighterSelectOne.attack }}</p>
@@ -29,9 +27,7 @@
         </div>
 
         <div class="fighterSelect">
-          <h3>Fighter 2</h3>
           <div class="fighterSelectTwoStats">
-            <p>Id: {{ fighterSelectTwo.id }}</p>
             <p>Name: {{ fighterSelectTwo.name }}</p>
             <p>Health: {{ fighterSelectTwo.health }}</p>
             <p>Attack: {{ fighterSelectTwo.attack }}</p>
@@ -55,7 +51,21 @@
       </div>
 
       <div class="fightLog" v-if="fightLog.length > 0">
-        <p v-for="log in fightLog" v-bind:key="log">{{ log }}</p>
+        <div v-for="(log, index) in fightLog" v-bind:key="log">
+          <div v-if="index === 0">
+            <span class="playerOne">{{ log.startGame[0] }}</span>
+            <span>{{ log.startGame[1] }}</span>
+            <span class="playerTwo">{{ log.startGame[2] }}</span>
+          </div>
+          <div v-else-if="index === fightLog.length - 1" :class="[log.endGame[0]]">
+            <span>{{ log.endGame[1] }}</span>
+          </div>
+          <div v-else class="row" :class=[log.row[0]]>
+            <span class="column columnOne">{{log.row[1]}}</span>
+            <span class="column columnTwo">{{log.row[2]}}</span>
+            <span class="column columnThree">{{log.row[3]}}</span>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -137,6 +147,27 @@ html {
 .fighterSelectOneStats,
 .fighterSelectTwoStats {
   border-radius: 10px;
-  padding: 10px;
+  padding: 2px 10px 2px 10px;
+}
+
+.playerOne {
+  width: 100%;
+  background-color: #ff6961;
+}
+
+.playerTwo {
+  background-color: #77dd77;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+  text-align: left;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 </style>
