@@ -21,9 +21,10 @@
 
           <div class="fighterChangeButtonsOne">
             <button class="fighterChangeButtonLeft" v-if="fighters[0].name !== fighterSelectOne.name"
-              @click="changeFighterOneToLeft">&lt;</button>
+              @click="changeFighter(`left`, fighterSelectOne, `fighterOne`)" data-direction="left"
+              data-selectedFighter="this.fighterSelectOne">&lt;</button>
             <button class="fighterChangeButtonRight" v-if="fighters[fighters.length - 1].name !== fighterSelectOne.name"
-              @click="changeFighterOneToRight">></button>
+              @click="changeFighter(`right`, fighterSelectOne, `fighterOne`)">></button>
           </div>
         </div>
 
@@ -40,9 +41,9 @@
 
           <div class="fighterChangeButtonsTwo">
             <button class="fighterChangeButtonLeft" v-if="fighters[0].name !== fighterSelectTwo.name"
-              @click="changeFighterTwoToLeft">&lt;</button>
+              @click="changeFighter(`left`, fighterSelectTwo, `fighterTwo`)">&lt;</button>
             <button class="fighterChangeButtonRight" v-if="fighters[fighters.length - 1].name !== fighterSelectTwo.name"
-              @click="changeFighterTwoToRight">></button>
+              @click="changeFighter(`right`, fighterSelectTwo, `fighterTwo`)">></button>
           </div>
         </div>
       </div>
@@ -92,30 +93,17 @@ export default {
         .post("/api/fighters/fight", [this.fighterSelectOne, this.fighterSelectTwo]);
       this.fightLog = res.data;
     },
-    changeFighterOneToRight() {
-      const nextFighter = this.fighters.filter(fighter => fighter.id === this.fighterSelectOne.id + 1);
+    changeFighter(direction, selectedFighter, player) {
+      let nextFighter = [];
+      if (direction === "right") {
+        nextFighter = this.fighters.filter(fighter => fighter.id === selectedFighter.id + 1);
+      } else {
+        nextFighter = this.fighters.filter(fighter => fighter.id === selectedFighter.id - 1);
+      }
       if (nextFighter.length === 1) {
-        this.fighterSelectOne = nextFighter[0];
+        player === "fighterOne" ? this.fighterSelectOne = nextFighter[0] : this.fighterSelectTwo = nextFighter[0];
       }
     },
-    changeFighterOneToLeft() {
-      const nextFighter = this.fighters.filter(fighter => fighter.id === this.fighterSelectOne.id - 1);
-      if (nextFighter.length === 1) {
-        this.fighterSelectOne = nextFighter[0];
-      }
-    },
-    changeFighterTwoToRight() {
-      const nextFighter = this.fighters.filter(fighter => fighter.id === this.fighterSelectTwo.id + 1);
-      if (nextFighter.length === 1) {
-        this.fighterSelectTwo = nextFighter[0];
-      }
-    },
-    changeFighterTwoToLeft() {
-      const nextFighter = this.fighters.filter(fighter => fighter.id === this.fighterSelectTwo.id - 1);
-      if (nextFighter.length === 1) {
-        this.fighterSelectTwo = nextFighter[0];
-      }
-    }
   }
 };
 </script>
