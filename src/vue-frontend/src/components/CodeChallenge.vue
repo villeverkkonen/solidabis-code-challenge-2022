@@ -109,6 +109,10 @@ export default {
 </script>
 
 <style>
+html {
+  background-color: #CEE5ED;
+}
+
 .codeChallenge {
   text-align: center;
 }
@@ -120,5 +124,19 @@ export default {
 
 .fight {
   margin-top: 10px;
+}
+
+.fighterSelectOneStats {
+  background-color: #ff6961;
+}
+
+.fighterSelectTwoStats {
+  background-color: #77dd77;
+}
+
+.fighterSelectOneStats,
+.fighterSelectTwoStats {
+  border-radius: 10px;
+  padding: 10px;
 }
 </style>
