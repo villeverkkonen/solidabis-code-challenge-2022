@@ -10,11 +10,11 @@
       <div class="fighterSelectParentDiv">
         <div class="fighterSelect">
           <div class="fighterSelectOneStats">
-            <p>Name: {{ fighterSelectOne.name }}</p>
-            <p>Health: {{ fighterSelectOne.health }}</p>
-            <p>Attack: {{ fighterSelectOne.attack }}</p>
-            <p>Defence: {{ fighterSelectOne.defence }}</p>
-            <p>Delay: {{ fighterSelectOne.delay }}</p>
+            <span>Name: {{ fighterSelectOne.name }}</span>
+            <span>Health: {{ fighterSelectOne.health }}</span>
+            <span>Attack: {{ fighterSelectOne.attack }}</span>
+            <span>Defence: {{ fighterSelectOne.defence }}</span>
+            <span>Delay: {{ fighterSelectOne.delay }}</span>
           </div>
 
           <div class="fighterChangeButtonsOne">
@@ -28,11 +28,11 @@
 
         <div class="fighterSelect">
           <div class="fighterSelectTwoStats">
-            <p>Name: {{ fighterSelectTwo.name }}</p>
-            <p>Health: {{ fighterSelectTwo.health }}</p>
-            <p>Attack: {{ fighterSelectTwo.attack }}</p>
-            <p>Defence: {{ fighterSelectTwo.defence }}</p>
-            <p>Delay: {{ fighterSelectTwo.delay }}</p>
+            <span>Name: {{ fighterSelectTwo.name }}</span>
+            <span>Health: {{ fighterSelectTwo.health }}</span>
+            <span>Attack: {{ fighterSelectTwo.attack }}</span>
+            <span>Defence: {{ fighterSelectTwo.defence }}</span>
+            <span>Delay: {{ fighterSelectTwo.delay }}</span>
           </div>
 
           <div class="fighterChangeButtonsTwo">
@@ -148,6 +148,13 @@ html {
 .fighterSelectTwoStats {
   border-radius: 10px;
   padding: 2px 10px 2px 10px;
+  text-align: left;
+}
+
+.fighterSelectOneStats span,
+.fighterSelectTwoStats span {
+  display: block;
+  margin: 5px 0 5px 0;
 }
 
 .playerOne {
