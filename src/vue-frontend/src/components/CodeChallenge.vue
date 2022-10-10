@@ -19,9 +19,10 @@
             <p>Delay: {{ fighterSelectOne.delay }}</p>
           </div>
 
-          <div>
-            <button v-if="fighters[0].name !== fighterSelectOne.name" @click="changeFighterOneToLeft">&lt;</button>
-            <button v-if="fighters[fighters.length - 1].name !== fighterSelectOne.name"
+          <div class="fighterChangeButtonsOne">
+            <button class="fighterChangeButtonLeft" v-if="fighters[0].name !== fighterSelectOne.name"
+              @click="changeFighterOneToLeft">&lt;</button>
+            <button class="fighterChangeButtonRight" v-if="fighters[fighters.length - 1].name !== fighterSelectOne.name"
               @click="changeFighterOneToRight">></button>
           </div>
         </div>
@@ -37,9 +38,10 @@
             <p>Delay: {{ fighterSelectTwo.delay }}</p>
           </div>
 
-          <div>
-            <button v-if="fighters[0].name !== fighterSelectTwo.name" @click="changeFighterTwoToLeft">&lt;</button>
-            <button v-if="fighters[fighters.length - 1].name !== fighterSelectTwo.name"
+          <div class="fighterChangeButtonsTwo">
+            <button class="fighterChangeButtonLeft" v-if="fighters[0].name !== fighterSelectTwo.name"
+              @click="changeFighterTwoToLeft">&lt;</button>
+            <button class="fighterChangeButtonRight" v-if="fighters[fighters.length - 1].name !== fighterSelectTwo.name"
               @click="changeFighterTwoToRight">></button>
           </div>
         </div>

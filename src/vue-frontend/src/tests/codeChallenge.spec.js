@@ -3,6 +3,7 @@ import CodeChallenge from "../components/CodeChallenge.vue";
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import axios from "axios";
 import flushPromises from "flush-promises";
+import { nextTick } from "vue";
 
 describe("CodeChallenge.vue", () => {
   const responsePost = {
@@ -68,6 +69,16 @@ describe("CodeChallenge.vue", () => {
     wrapper.unmount();
   });
 
+  function nameShouldMatch(element, name) {
+    const fighterSelectOneStats = wrapper.find(element).findAll("p");
+    expect(fighterSelectOneStats.at(1).text()).toMatch(name);
+  }
+
+  function clickFighterChangeButton(element, index) {
+    const fighterChangeButtons = wrapper.findAll(element);
+    fighterChangeButtons.at(index).trigger("click");
+  }
+
   it("should get fighters", () => {
     expect(axios.get).toHaveBeenCalledTimes(1);
     expect(wrapper.vm.fighters.length === 3);
@@ -108,5 +119,79 @@ describe("CodeChallenge.vue", () => {
     await flushPromises();
     const fightLogText = wrapper.findAll(".fightLog").at(0).text();
     expect(fightLogText).toContain("Apple VS Pineapple");
+  });
+
+  it("should be able to change fighter for player one", async () => {
+    const fighterChangeButtons = wrapper.findAll(".fighterChangeButtonsOne");
+    const fighterSelectOneStats = wrapper
+      .find(".fighterSelectOneStats")
+      .findAll("p");
+    // By default Apple is chosen
+    nameShouldMatch(".fighterSelectOneStats", "Name: Apple");
+    // Only button to right should be visible at start
+    expect(fighterChangeButtons.length).eq(1);
+
+    // First and only button is for right
+    clickFighterChangeButton(".fighterChangeButtonsOne", 0);
+
+    // await or nextTick doesn't seem to work so hard coded timeouts then
+    setTimeout(function () {
+      nameShouldMatch(".fighterSelectOneStats", "Name: Banana");
+      expect(fighterChangeButtons.length).eq(2);
+
+      // Now second button is for right
+      clickFighterChangeButton(".fighterChangeButtonsOne", 1);
+
+      setTimeout(function () {
+        nameShouldMatch(".fighterSelectOneStats", "Name: Pineapple");
+        // Button to right vanishes
+        expect(fighterChangeButtons.length).eq(1);
+
+        // Back to one step left
+        clickFighterChangeButton(".fighterChangeButtonsOne", 0);
+
+        setTimeout(function () {
+          nameShouldMatch(".fighterSelectOneStats", "Name: Banana");
+          expect(fighterChangeButtons.length).eq(2);
+        }, 100);
+      }, 100);
+    }, 100);
+  });
+
+  it("should be able to change fighter for player two", async () => {
+    const fighterChangeButtons = wrapper.findAll(".fighterChangeButtonsTwo");
+    const fighterSelectOneStats = wrapper
+      .find(".fighterSelectOneStats")
+      .findAll("p");
+    // By default Apple is chosen
+    nameShouldMatch(".fighterSelectOneStats", "Name: Apple");
+    // Only button to right should be visible at start
+    expect(fighterChangeButtons.length).eq(1);
+
+    // First and only button is for right
+    clickFighterChangeButton(".fighterChangeButtonsTwo", 0);
+
+    // await or nextTick doesn't seem to work so hard coded timeouts then
+    setTimeout(function () {
+      nameShouldMatch(".fighterSelectOneStats", "Name: Banana");
+      expect(fighterChangeButtons.length).eq(2);
+
+      // Now second button is for right
+      clickFighterChangeButton(".fighterChangeButtonsTwo", 1);
+
+      setTimeout(function () {
+        nameShouldMatch(".fighterSelectOneStats", "Name: Pineapple");
+        // Button to right vanishes
+        expect(fighterChangeButtons.length).eq(1);
+
+        // Back to one step left
+        clickFighterChangeButton(".fighterChangeButtonsTwo", 0);
+
+        setTimeout(function () {
+          nameShouldMatch(".fighterSelectOneStats", "Name: Banana");
+          expect(fighterChangeButtons.length).eq(2);
+        }, 100);
+      }, 100);
+    }, 100);
   });
 });
