@@ -9,6 +9,7 @@ import solid.abis.challenge.util.TestUtil;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -36,10 +37,10 @@ public class FighterServiceTest {
         List<FighterFoodDTO> fighters = new ArrayList<>();
         fighters.add(null);
         fighters.add(testUtil.buildFighterApple());
-        List<String> fightLog = fighterService.fight(fighters);
+        List<Map<String, List<String>>> fightLog = fighterService.fight(fighters);
 
         assertEquals(1, fightLog.size());
-        assertEquals("Two fighters are required for a fair brawl.", fightLog.get(0));
+        assertEquals("Two fighters are required for a fair brawl.", fightLog.get(0).get("invalidFighters").get(0));
     }
 
     @Test
@@ -47,9 +48,9 @@ public class FighterServiceTest {
         List<FighterFoodDTO> fighters = new ArrayList<>();
         fighters.add(testUtil.buildFighterPineapple());
         fighters.add(testUtil.buildFighterBanana());
-        List<String> fightLog = fighterService.fight(fighters);
+        List<Map<String, List<String>>> fightLog = fighterService.fight(fighters);
 
         assertTrue(fightLog.size() > 1);
-        assertTrue(fightLog.get(fightLog.size() - 1).contains("wins the battle!"));
+        assertTrue(fightLog.get(fightLog.size() - 1).get("endGame").get(1).contains("wins the battle!"));
     }
 }

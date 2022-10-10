@@ -76,7 +76,7 @@ describe("CodeChallenge.vue", () => {
   });
 
   function nameShouldMatch(element, name) {
-    const fighterSelectOneStats = wrapper.find(element).findAll("p");
+    const fighterSelectOneStats = wrapper.find(element).findAll("span");
     expect(fighterSelectOneStats.at(0).text()).toMatch(name);
   }
 
@@ -96,7 +96,7 @@ describe("CodeChallenge.vue", () => {
     const fighterSelectOne = fighterSelectDivs.at(0);
     const fighterSelectOneStats = wrapper
       .find(".fighterSelectOneStats")
-      .findAll("p");
+      .findAll("span");
     expect(fighterSelectOneStats.at(0).text()).toMatch("Name: Apple");
     expect(fighterSelectOneStats.at(1).text()).toMatch("Health: 27");
     expect(fighterSelectOneStats.at(2).text()).toMatch("Attack: 8.3");
@@ -106,7 +106,7 @@ describe("CodeChallenge.vue", () => {
     const fighterSelectTwo = fighterSelectDivs.at(1);
     const fighterSelectTwoStats = wrapper
       .find(".fighterSelectTwoStats")
-      .findAll("p");
+      .findAll("span");
     expect(fighterSelectTwoStats.at(0).text()).toMatch("Name: Pineapple");
     expect(fighterSelectTwoStats.at(1).text()).toMatch("Health: 33.3");
     expect(fighterSelectTwoStats.at(2).text()).toMatch("Attack: 11.2");
@@ -129,7 +129,7 @@ describe("CodeChallenge.vue", () => {
     const fighterChangeButtons = wrapper.findAll(".fighterChangeButtonsOne");
     const fighterSelectOneStats = wrapper
       .find(".fighterSelectOneStats")
-      .findAll("p");
+      .findAll("span");
     // By default Apple is chosen
     nameShouldMatch(".fighterSelectOneStats", "Name: Apple");
     // Only button to right should be visible at start
@@ -164,9 +164,6 @@ describe("CodeChallenge.vue", () => {
 
   it("should be able to change fighter for player two", async () => {
     const fighterChangeButtons = wrapper.findAll(".fighterChangeButtonsTwo");
-    const fighterSelectOneStats = wrapper
-      .find(".fighterSelectOneStats")
-      .findAll("p");
     // By default Apple is chosen
     nameShouldMatch(".fighterSelectOneStats", "Name: Apple");
     // Only button to right should be visible at start
