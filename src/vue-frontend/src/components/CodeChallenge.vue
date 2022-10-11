@@ -17,7 +17,7 @@
             <span>Delay: {{ fighterSelectOne.delay }}</span>
           </div>
 
-          <div class="fighterChangeButtonsOne">
+          <div class="fighterChangeButtons fighterChangeButtonsOne">
             <button class="fighterChangeButtonLeft" v-if="fighters[0].name !== fighterSelectOne.name"
               @click="changeFighter(`left`, fighterSelectOne, `fighterOne`)" data-direction="left"
               data-selectedFighter="this.fighterSelectOne">&lt;</button>
@@ -35,7 +35,7 @@
             <span>Delay: {{ fighterSelectTwo.delay }}</span>
           </div>
 
-          <div class="fighterChangeButtonsTwo">
+          <div class="fighterChangeButtons fighterChangeButtonsTwo">
             <button class="fighterChangeButtonLeft" v-if="fighters[0].name !== fighterSelectTwo.name"
               @click="changeFighter(`left`, fighterSelectTwo, `fighterTwo`)">&lt;</button>
             <button class="fighterChangeButtonRight" v-if="fighters[fighters.length - 1].name !== fighterSelectTwo.name"
@@ -129,11 +129,18 @@ html {
 
 .fighterSelect {
   display: inline-block;
-  margin: 0 20px 0 20px;
+  margin: 5px 15px 5px 15px;
+  font-size: 18px;
+  width: 145px;
+  height: 145px;
+}
+
+.fighterChangeButtons {
+  margin-top: 10px;
 }
 
 .fight {
-  margin-top: 10px;
+  margin: 15px 0 15px 0;
 }
 
 .fighterSelectOneStats {
@@ -157,6 +164,13 @@ html {
   margin: 5px 0 5px 0;
 }
 
+.fightLog {
+  width: 75%;
+  margin: auto;
+  padding: 5px;
+  border-radius: 5px;
+}
+
 .playerOne {
   width: 100%;
   background-color: #ff6961;
@@ -168,13 +182,44 @@ html {
 
 .column {
   float: left;
-  width: 33.33%;
+  width: 32, 5%;
   text-align: left;
+}
+
+.columnOne {
+  width: 15%;
+}
+
+.columnThree {
+  float: right;
+}
+
+.row {
+  border-bottom: 1px solid #1D1C1A;
 }
 
 .row:after {
   content: "";
   display: table;
   clear: both;
+}
+
+@media only screen and (max-width: 600px) {
+
+  .columnTwo,
+  .columnThree {
+    float: none;
+    display: block;
+    text-align: right;
+  }
+}
+
+@media only screen and (max-width: 365px) {
+  .fighterSelect {
+    margin: 5px 10px 5px 10px;
+    font-size: 16px;
+    width: 140px;
+    height: 140px;
+  }
 }
 </style>
