@@ -83,6 +83,10 @@ export default {
   font-weight: bold;
 }
 
+.fighterChangeButton:hover {
+  cursor: pointer;
+}
+
 .fighterSelectOneStats {
   background-color: #FAA0A0;
 }

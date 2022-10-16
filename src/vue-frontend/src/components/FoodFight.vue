@@ -91,6 +91,10 @@ html {
   font-weight: bold;
 }
 
+.fightButton:hover {
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 365px) {
   .fighterSelect {
     margin: 5px 10px 5px 10px;
