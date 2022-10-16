@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
@@ -98,7 +99,7 @@ public class FighterService {
         if (resource == null) {
             throw new IllegalArgumentException("File not found! " + FighterService.FOOD_JSON);
         } else {
-            return new File(resource.toURI());
+            return new File(new URI(resource.toString()).getSchemeSpecificPart());
         }
     }
 }
