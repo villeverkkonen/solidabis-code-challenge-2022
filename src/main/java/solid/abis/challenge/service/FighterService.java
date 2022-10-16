@@ -9,9 +9,7 @@ import solid.abis.challenge.dto.FoodDTO;
 import solid.abis.challenge.mapper.FoodMapper;
 
 import javax.annotation.Resource;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -25,17 +23,19 @@ public class FighterService {
     @Resource
     private FoodMapper foodMapper;
 
-    private static final String FOOD_JSON = "json/foods.json";
+    private static final String FOOD_JSON = "/json/foods.json";
 
     public List<FighterFoodDTO> getFoodsFromJson() {
-        try (FileReader reader = new FileReader(this.getFileFromResource())) {
+        try (InputStream in = getClass().getResourceAsStream(FOOD_JSON)) {
+            assert in != null;
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             Object obj = new JSONParser().parse(reader);
             JSONArray foods = (JSONArray) obj;
             List<FoodDTO> foodDTOList = foodMapper.jsonArrayToFoodDTOList(foods);
             List<FighterFoodDTO> fighterFoodDTOList = foodDTOList.stream().map(foodMapper::foodToFighterFood).collect(Collectors.toList());
             fighterFoodDTOList.sort(Comparator.comparing(FighterFoodDTO::getId));
             return fighterFoodDTOList;
-        } catch (IOException | ParseException | URISyntaxException e) {
+        } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
         }
     }
@@ -91,15 +91,5 @@ public class FighterService {
     private static double roundToOneDecimal(final double value) {
         int scale = (int) Math.pow(10, 1);
         return (double) Math.round(value * scale) / scale;
-    }
-
-    private File getFileFromResource() throws URISyntaxException {
-        ClassLoader classLoader = getClass().getClassLoader();
-        URL resource = classLoader.getResource(FighterService.FOOD_JSON);
-        if (resource == null) {
-            throw new IllegalArgumentException("File not found! " + FighterService.FOOD_JSON);
-        } else {
-            return new File(new URI(resource.toString()).getSchemeSpecificPart());
-        }
     }
 }
