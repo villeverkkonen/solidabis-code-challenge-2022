@@ -1,5 +1,5 @@
 <template>
-  <div class="codeChallenge">
+  <div class="foodFight">
 
     <div v-if="loadingFighters">
       <p>Loading...</p>
@@ -26,7 +26,7 @@ import FightLog from './FightLog.vue';
 import FighterSelect from './FighterSelect.vue';
 
 export default {
-  name: "CodeChallenge",
+  name: "FoodFight",
   components: { FightLog, FighterSelect },
   data() {
     return {
@@ -74,7 +74,7 @@ html {
   background-color: #CEE5ED;
 }
 
-.codeChallenge {
+.foodFight {
   text-align: center;
 }
 

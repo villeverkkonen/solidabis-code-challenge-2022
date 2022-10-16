@@ -1,14 +1,14 @@
 <template>
-  <CodeChallenge />
+  <FoodFight />
 </template>
 
 <script>
-import CodeChallenge from './components/CodeChallenge.vue'
+import FoodFight from './components/FoodFight.vue'
 
 export default {
   name: 'App',
   components: {
-    CodeChallenge
+    FoodFight
   }
 }
 </script>
