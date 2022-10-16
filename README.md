@@ -15,8 +15,6 @@
 - Vue
 - Vue Test Utils / Vitest unit tests
 
-Desktop:
 ![Desktop](/src/vue-frontend/public/images/app-desktop.png)
 
-Mobile:
 ![Mobile](/src/vue-frontend/public/images/app-mobile.png)
