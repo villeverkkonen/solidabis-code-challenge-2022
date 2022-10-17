@@ -1,10 +1,10 @@
-import { shallowMount } from "@vue/test-utils";
-import CodeChallenge from "../components/CodeChallenge.vue";
+import { mount } from "@vue/test-utils";
+import FoodFight from "../components/FoodFight.vue";
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import axios from "axios";
 import flushPromises from "flush-promises";
 
-describe("CodeChallenge.vue", () => {
+describe("FoodFight.vue", () => {
   const responsePost = {
     data: [
       { startGame: ["Apple", [" VS "], "Pineapple"] },
@@ -64,7 +64,7 @@ describe("CodeChallenge.vue", () => {
     };
 
     axios.get.mockResolvedValue(responseGet);
-    wrapper = shallowMount(CodeChallenge);
+    wrapper = mount(FoodFight);
 
     // Wait until component has mounted
     await flushPromises();
@@ -91,9 +91,6 @@ describe("CodeChallenge.vue", () => {
   });
 
   it("should render two fighter divs", () => {
-    const fighterSelectDivs = wrapper.findAll(".fighterSelect");
-
-    const fighterSelectOne = fighterSelectDivs.at(0);
     const fighterSelectOneStats = wrapper
       .find(".fighterSelectOneStats")
       .findAll("span");
@@ -103,7 +100,6 @@ describe("CodeChallenge.vue", () => {
     expect(fighterSelectOneStats.at(3).text()).toMatch("Defence: 0.2");
     expect(fighterSelectOneStats.at(4).text()).toMatch("Delay: 0.9");
 
-    const fighterSelectTwo = fighterSelectDivs.at(1);
     const fighterSelectTwoStats = wrapper
       .find(".fighterSelectTwoStats")
       .findAll("span");
@@ -116,7 +112,7 @@ describe("CodeChallenge.vue", () => {
 
   it("should fight and show fight logs", async () => {
     axios.post.mockResolvedValue(responsePost);
-    wrapper.find("#fightButton").trigger("click");
+    wrapper.findAll(".fightButton").at(0).trigger("click");
     // Wait until post completed
     await flushPromises();
     const fightLogStartGame = wrapper.findAll(".fightLog");
@@ -127,9 +123,7 @@ describe("CodeChallenge.vue", () => {
 
   it("should be able to change fighter for player one", async () => {
     const fighterChangeButtons = wrapper.findAll(".fighterChangeButtonsOne");
-    const fighterSelectOneStats = wrapper
-      .find(".fighterSelectOneStats")
-      .findAll("span");
+
     // By default Apple is chosen
     nameShouldMatch(".fighterSelectOneStats", "Name: Apple");
     // Only button to right should be visible at start

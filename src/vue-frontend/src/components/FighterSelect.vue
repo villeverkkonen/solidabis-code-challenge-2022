@@ -98,7 +98,7 @@ export default {
 .fighterSelectOneStats,
 .fighterSelectTwoStats {
   border-radius: 10px;
-  padding: 2px 10px 2px 10px;
+  padding: 0 5px 0 5px;
   text-align: left;
   border: solid #1D1C1A;
   box-shadow: 4px 8px #888888;

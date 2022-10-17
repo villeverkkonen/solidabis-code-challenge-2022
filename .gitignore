@@ -35,7 +35,7 @@ build/
 ### Vue Frontend ###
 /src/vue-frontend/.DS_Store
 /src/vue-frontend/node_modules
-/src/vue-frontend/dist
+# /src/vue-frontend/dist
 # local env files
 /src/vue-frontend/.env.local
 /src/vue-frontend/.env.*.local

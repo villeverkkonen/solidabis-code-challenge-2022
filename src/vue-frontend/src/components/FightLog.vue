@@ -34,6 +34,7 @@ export default {
   border: solid #1D1C1A;
   box-shadow: 4px 8px #888888;
   color: #1D1C1A;
+  margin-bottom: 20px;
 }
 
 .playerOne {
