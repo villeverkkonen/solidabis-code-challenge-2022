@@ -64,8 +64,8 @@ export default {
   display: inline-block;
   margin: 5px 15px 5px 15px;
   font-size: 18px;
-  width: 150px;
-  height: 150px;
+  width: 155px;
+  height: 155px;
   color: #1D1C1A;
 }
 
@@ -108,5 +108,14 @@ export default {
 .fighterSelectTwoStats span {
   display: block;
   margin: 5px 0 5px 0;
+}
+
+@media only screen and (max-width: 385px) {
+  .fighterSelect {
+    margin: 5px 10px 5px 10px;
+    font-size: 16px;
+    width: 150px;
+    height: 150px;
+  }
 }
 </style>
